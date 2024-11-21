@@ -45,7 +45,7 @@ psychopyVersion = '2024.2.4'
 expName = 'thresholding'  # from the Builder filename that created this script
 # information about this experiment
 expInfo = {
-    'participant': f"{randint(0, 999999):06.0f}",
+    'participant': '',
     'session': '001',
     'date|hid': data.getDateStr(),
     'expName|hid': expName,
@@ -377,7 +377,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "trial" ---
     intro = visual.TextStim(win=win, name='intro',
-        text='Please press space to reless an electric shock.',
+        text='Please press space to release an electric shock.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
@@ -659,7 +659,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             ## read the condition and using intensity here
             intensity = thisTrial['intensity']
             ## show the intensity in text
-            text.text = f'Delivering.\n\nThat is {intensity} mA.'
+            text.text = f'Delivering.'
 
             # if text is starting this frame...
             if text.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
@@ -711,9 +711,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                 continue
             
             # Deliver the shock here
-            # electrical_shock = DS8R(mode=1, polarity=1, source=1,demand = intensity * 10,
-            #                         pulse_width=1000, dwell=10, recovery=20, enabled=1)
-            # electrical_shock.run()
+            electrical_shock = DS8R(mode=1, polarity=1, source=1,demand = int(intensity * 10),
+                                     pulse_width=500, dwell=10, recovery=20, enabled=1)
+            electrical_shock.run()
             
             # check if all components have finished
             if not continueRoutine:  # a component has requested a forced-end of Routine
@@ -1137,9 +1137,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             continue
         
         # Deliver the shock here
-        # electrical_shock = DS8R(mode=1, polarity=1, source=1,demand = intensity * 10,
-        #                         pulse_width=1000, dwell=10, recovery=20, enabled=1)
-        # electrical_shock.run()
+        electrical_shock = DS8R(mode=1, polarity=1, source=1,demand = 10,
+                                pulse_width=500, dwell=10, recovery=20, enabled=1)
+        electrical_shock.run()
         
         # check if all components have finished
         if not continueRoutine:  # a component has requested a forced-end of Routine
