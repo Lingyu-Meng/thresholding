@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 This experiment was created using PsychoPy3 Experiment Builder (v2024.2.4),
-    on 一月 08, 2025, at 00:59
+    on 一月 14, 2025, at 01:15
 If you publish work using this script the most relevant publication is:
 
     Peirce J, Gray JR, Simpson S, MacAskill M, Höchenberger R, Sogo H, Kastman E, Lindeløv JK. (2019) 
@@ -194,7 +194,7 @@ def setupWindow(expInfo=None, win=None):
         # if not given a window to setup, make one
         win = visual.Window(
             size=_winSize, fullscr=_fullScr, screen=0,
-            winType='pyglet', allowGUI=False, allowStencil=True,
+            winType='pyglet', allowGUI=False, allowStencil=False,
             monitor='testMonitor', color=[0,0,0], colorSpace='rgb',
             backgroundImage='', backgroundFit='none',
             blendMode='avg', useFBO=True,
@@ -265,12 +265,6 @@ def setupDevices(expInfo, thisExp, win):
         key_resp = deviceManager.addDevice(
             deviceClass='keyboard',
             deviceName='key_resp',
-        )
-    if deviceManager.getDevice('key_resp_2') is None:
-        # initialise key_resp_2
-        key_resp_2 = deviceManager.addDevice(
-            deviceClass='keyboard',
-            deviceName='key_resp_2',
         )
     # return True if completed successfully
     return True
@@ -391,43 +385,28 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    intensity_of_current = visual.TextStim(win=win, name='intensity_of_current',
-        text='',
-        font='Arial',
-        pos=(0, -0.2), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
-        color='white', colorSpace='rgb', opacity=None, 
-        languageStyle='LTR',
-        depth=-1.0);
     
     # --- Initialize components for Routine "rate" ---
     text = visual.TextStim(win=win, name='text',
-        text='Please rate how this shock hurt from 1 (not really) to 10 (too much).\n\nPlease press space to submit.',
+        text='Please rate how this shock hurt from 1 (not really) to 10 (too much).\n\nPlease enter digits only and confirm pressing enter.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    textbox = visual.TextBox2(
-         win, text=None, placeholder='Type here...', font='Arial',
-         ori=0.0, pos=(0, -0.3), draggable=False,      letterHeight=0.05,
-         size=(0.5, 0.5), borderWidth=2.0,
-         color='white', colorSpace='rgb',
-         opacity=None,
-         bold=False, italic=False,
-         lineSpacing=1.0, speechPoint=None,
-         padding=0.0, alignment='center',
-         anchor='center', overflow='visible',
-         fillColor=None, borderColor=None,
-         flipHoriz=False, flipVert=False, languageStyle='LTR',
-         editable=True,
-         name='textbox',
-         depth=-1, autoLog=True,
-    )
-    key_resp_2 = keyboard.Keyboard(deviceName='key_resp_2')
+    # Run 'Begin Experiment' code from rate_code
+    displayText = ''
+    oldDisplayText = ''
+    skipExp = 1
+    rate_text = visual.TextStim(win=win, name='rate_text',
+        text=None,
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-2.0);
     
     # --- Initialize components for Routine "break_loop" ---
-    # Run 'Begin Experiment' code from code
-    #max_inten = 0
     
     # --- Initialize components for Routine "wait" ---
     intro = visual.TextStim(win=win, name='intro',
@@ -450,29 +429,23 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     
     # --- Initialize components for Routine "rate" ---
     text = visual.TextStim(win=win, name='text',
-        text='Please rate how this shock hurt from 1 (not really) to 10 (too much).\n\nPlease press space to submit.',
+        text='Please rate how this shock hurt from 1 (not really) to 10 (too much).\n\nPlease enter digits only and confirm pressing enter.',
         font='Arial',
         pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
         color='white', colorSpace='rgb', opacity=None, 
         languageStyle='LTR',
         depth=0.0);
-    textbox = visual.TextBox2(
-         win, text=None, placeholder='Type here...', font='Arial',
-         ori=0.0, pos=(0, -0.3), draggable=False,      letterHeight=0.05,
-         size=(0.5, 0.5), borderWidth=2.0,
-         color='white', colorSpace='rgb',
-         opacity=None,
-         bold=False, italic=False,
-         lineSpacing=1.0, speechPoint=None,
-         padding=0.0, alignment='center',
-         anchor='center', overflow='visible',
-         fillColor=None, borderColor=None,
-         flipHoriz=False, flipVert=False, languageStyle='LTR',
-         editable=True,
-         name='textbox',
-         depth=-1, autoLog=True,
-    )
-    key_resp_2 = keyboard.Keyboard(deviceName='key_resp_2')
+    # Run 'Begin Experiment' code from rate_code
+    displayText = ''
+    oldDisplayText = ''
+    skipExp = 1
+    rate_text = visual.TextStim(win=win, name='rate_text',
+        text=None,
+        font='Arial',
+        pos=(0, 0), draggable=False, height=0.05, wrapWidth=None, ori=0.0, 
+        color='white', colorSpace='rgb', opacity=None, 
+        languageStyle='LTR',
+        depth=-2.0);
     
     # create some handy timers
     
@@ -518,10 +491,16 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     if thisTrial != None:
         for paramName in thisTrial:
             globals()[paramName] = thisTrial[paramName]
+    if thisSession is not None:
+        # if running in a Session with a Liaison client, send data up to now
+        thisSession.sendExperimentData()
     
     for thisTrial in trials:
         currentLoop = trials
         thisExp.timestampOnFlip(win, 'thisRow.t', format=globalClock.format)
+        if thisSession is not None:
+            # if running in a Session with a Liaison client, send data up to now
+            thisSession.sendExperimentData()
         # abbreviate parameter names if possible (e.g. rgb = thisTrial.rgb)
         if thisTrial != None:
             for paramName in thisTrial:
@@ -674,13 +653,12 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine shock
         shock = data.Routine(
             name='shock',
-            components=[cue, intensity_of_current],
+            components=[cue],
         )
         shock.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
         cue.setText('Delivering.')
-        intensity_of_current.setText(intensity)
         # store start times for shock
         shock.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         shock.tStart = globalClock.getTime(format='float')
@@ -748,40 +726,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
                     cue.status = FINISHED
                     cue.setAutoDraw(False)
             
-            # *intensity_of_current* updates
-            
-            # if intensity_of_current is starting this frame...
-            if intensity_of_current.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                # keep track of start time/frame for later
-                intensity_of_current.frameNStart = frameN  # exact frame index
-                intensity_of_current.tStart = t  # local t and not account for scr refresh
-                intensity_of_current.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(intensity_of_current, 'tStartRefresh')  # time at next scr refresh
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'intensity_of_current.started')
-                # update status
-                intensity_of_current.status = STARTED
-                intensity_of_current.setAutoDraw(True)
-            
-            # if intensity_of_current is active this frame...
-            if intensity_of_current.status == STARTED:
-                # update params
-                pass
-            
-            # if intensity_of_current is stopping this frame...
-            if intensity_of_current.status == STARTED:
-                # is it time to stop? (based on global clock, using actual start)
-                if tThisFlipGlobal > intensity_of_current.tStartRefresh + 0.5-frameTolerance:
-                    # keep track of stop time/frame for later
-                    intensity_of_current.tStop = t  # not accounting for scr refresh
-                    intensity_of_current.tStopRefresh = tThisFlipGlobal  # on global time
-                    intensity_of_current.frameNStop = frameN  # exact frame index
-                    # add timestamp to datafile
-                    thisExp.timestampOnFlip(win, 'intensity_of_current.stopped')
-                    # update status
-                    intensity_of_current.status = FINISHED
-                    intensity_of_current.setAutoDraw(False)
-            
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
                 thisExp.status = FINISHED
@@ -833,17 +777,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         # create an object to store info about Routine rate
         rate = data.Routine(
             name='rate',
-            components=[text, textbox, key_resp_2],
+            components=[text, rate_text],
         )
         rate.status = NOT_STARTED
         continueRoutine = True
         # update component parameters for each repeat
-        textbox.reset()
-        textbox.setText('')
-        # create starting attributes for key_resp_2
-        key_resp_2.keys = []
-        key_resp_2.rt = []
-        _key_resp_2_allKeys = []
+        # Run 'Begin Routine' code from rate_code
+        cursorCounter = 0
+        cursorVariable = '|'
+        captured_string = ''
+        subject_response_finished = False
+        event.clearEvents()
         # store start times for rate
         rate.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
         rate.tStart = globalClock.getTime(format='float')
@@ -896,54 +840,76 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
             if text.status == STARTED:
                 # update params
                 pass
+            # Run 'Each Frame' code from rate_code
+            if cursorCounter >= 30:
+                if cursorVariable == '|':
+                    cursorVariable = ' '
+                else:
+                    cursorVariable = '|'
+                cursorCounter = 0
+            cursorCounter += 1
             
-            # *textbox* updates
+            if subject_response_finished:
+                final_response = captured_string
+                continueRoutine = False
+                
+            keys = event.getKeys()
+            if len(keys):
+                if 'escape' in keys:
+                    core.quit()
+                elif 'backspace' in keys:
+                    captured_string = captured_string[:-1]
+                elif 'delete' in keys:
+                    captured_string = captured_string[:-1]
+                elif 'return' in keys and (len(captured_string) < 2 or captured_string == '10'):
+                    subject_response_finished = True
+                elif '0' in keys:
+                    captured_string = captured_string+'0'
+                elif '1' in keys:
+                    captured_string = captured_string+'1'
+                elif '2' in keys:
+                    captured_string = captured_string+'2'
+                elif '3' in keys:
+                    captured_string = captured_string+'3'
+                elif '4' in keys:
+                    captured_string = captured_string+'4'
+                elif '5' in keys:
+                    captured_string = captured_string+'5'
+                elif '6' in keys:
+                    captured_string = captured_string+'6'
+                elif '7' in keys:
+                    captured_string = captured_string+'7'
+                elif '8' in keys:
+                    captured_string = captured_string+'8'
+                elif '9' in keys:
+                    captured_string = captured_string+'9'
+                else:
+                    pass
             
-            # if textbox is starting this frame...
-            if textbox.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+            displayText = captured_string+cursorVariable
+            if displayText != oldDisplayText:
+                rate_text.setText(displayText)
+                oldDisplayText=displayText
+            
+            # *rate_text* updates
+            
+            # if rate_text is starting this frame...
+            if rate_text.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
                 # keep track of start time/frame for later
-                textbox.frameNStart = frameN  # exact frame index
-                textbox.tStart = t  # local t and not account for scr refresh
-                textbox.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(textbox, 'tStartRefresh')  # time at next scr refresh
+                rate_text.frameNStart = frameN  # exact frame index
+                rate_text.tStart = t  # local t and not account for scr refresh
+                rate_text.tStartRefresh = tThisFlipGlobal  # on global time
+                win.timeOnFlip(rate_text, 'tStartRefresh')  # time at next scr refresh
                 # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'textbox.started')
+                thisExp.timestampOnFlip(win, 'rate_text.started')
                 # update status
-                textbox.status = STARTED
-                textbox.setAutoDraw(True)
+                rate_text.status = STARTED
+                rate_text.setAutoDraw(True)
             
-            # if textbox is active this frame...
-            if textbox.status == STARTED:
+            # if rate_text is active this frame...
+            if rate_text.status == STARTED:
                 # update params
                 pass
-            
-            # *key_resp_2* updates
-            waitOnFlip = False
-            
-            # if key_resp_2 is starting this frame...
-            if key_resp_2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-                # keep track of start time/frame for later
-                key_resp_2.frameNStart = frameN  # exact frame index
-                key_resp_2.tStart = t  # local t and not account for scr refresh
-                key_resp_2.tStartRefresh = tThisFlipGlobal  # on global time
-                win.timeOnFlip(key_resp_2, 'tStartRefresh')  # time at next scr refresh
-                # add timestamp to datafile
-                thisExp.timestampOnFlip(win, 'key_resp_2.started')
-                # update status
-                key_resp_2.status = STARTED
-                # keyboard checking is just starting
-                waitOnFlip = True
-                win.callOnFlip(key_resp_2.clock.reset)  # t=0 on next screen flip
-                win.callOnFlip(key_resp_2.clearEvents, eventType='keyboard')  # clear events on next screen flip
-            if key_resp_2.status == STARTED and not waitOnFlip:
-                theseKeys = key_resp_2.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
-                _key_resp_2_allKeys.extend(theseKeys)
-                if len(_key_resp_2_allKeys):
-                    key_resp_2.keys = _key_resp_2_allKeys[-1].name  # just the last key pressed
-                    key_resp_2.rt = _key_resp_2_allKeys[-1].rt
-                    key_resp_2.duration = _key_resp_2_allKeys[-1].duration
-                    # a response ends the routine
-                    continueRoutine = False
             
             # check for quit (typically the Esc key)
             if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -984,14 +950,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         rate.tStop = globalClock.getTime(format='float')
         rate.tStopRefresh = tThisFlipGlobal
         thisExp.addData('rate.stopped', rate.tStop)
-        trials.addData('textbox.text',textbox.text)
-        # check responses
-        if key_resp_2.keys in ['', [], None]:  # No response was made
-            key_resp_2.keys = None
-        trials.addData('key_resp_2.keys',key_resp_2.keys)
-        if key_resp_2.keys != None:  # we had a response
-            trials.addData('key_resp_2.rt', key_resp_2.rt)
-            trials.addData('key_resp_2.duration', key_resp_2.duration)
+        # Run 'End Routine' code from rate_code
+        rate = final_response.replace("\n",",")
+        thisExp.addData('rate',rate)
         # the Routine "rate" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
         
@@ -1005,7 +966,7 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         continueRoutine = True
         # update component parameters for each repeat
         # Run 'Begin Routine' code from code
-        if textbox.text == '10' or textbox.text == '9':
+        if captured_string == '10' or captured_string == '9':
             max_inten = thisTrial['intensity']
             trials.finished = True
         # store start times for break_loop
@@ -1082,8 +1043,13 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         thisExp.addData('break_loop.stopped', break_loop.tStop)
         # the Routine "break_loop" was not non-slip safe, so reset the non-slip timer
         routineTimer.reset()
+        thisExp.nextEntry()
+        
     # completed 1.0 repeats of 'trials'
     
+    if thisSession is not None:
+        # if running in a Session with a Liaison client, send data up to now
+        thisSession.sendExperimentData()
     
     # --- Prepare to start Routine "wait" ---
     # create an object to store info about Routine wait
@@ -1236,8 +1202,6 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     continueRoutine = True
     # update component parameters for each repeat
     cue_2.setText('Delivering.')
-    # Run 'Begin Routine' code from code_2
-    print(max_inten)
     # store start times for shock_confirm
     shock_confirm.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     shock_confirm.tStart = globalClock.getTime(format='float')
@@ -1354,17 +1318,17 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     # create an object to store info about Routine rate
     rate = data.Routine(
         name='rate',
-        components=[text, textbox, key_resp_2],
+        components=[text, rate_text],
     )
     rate.status = NOT_STARTED
     continueRoutine = True
     # update component parameters for each repeat
-    textbox.reset()
-    textbox.setText('')
-    # create starting attributes for key_resp_2
-    key_resp_2.keys = []
-    key_resp_2.rt = []
-    _key_resp_2_allKeys = []
+    # Run 'Begin Routine' code from rate_code
+    cursorCounter = 0
+    cursorVariable = '|'
+    captured_string = ''
+    subject_response_finished = False
+    event.clearEvents()
     # store start times for rate
     rate.tStartRefresh = win.getFutureFlipTime(clock=globalClock)
     rate.tStart = globalClock.getTime(format='float')
@@ -1414,54 +1378,76 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
         if text.status == STARTED:
             # update params
             pass
+        # Run 'Each Frame' code from rate_code
+        if cursorCounter >= 30:
+            if cursorVariable == '|':
+                cursorVariable = ' '
+            else:
+                cursorVariable = '|'
+            cursorCounter = 0
+        cursorCounter += 1
         
-        # *textbox* updates
+        if subject_response_finished:
+            final_response = captured_string
+            continueRoutine = False
+            
+        keys = event.getKeys()
+        if len(keys):
+            if 'escape' in keys:
+                core.quit()
+            elif 'backspace' in keys:
+                captured_string = captured_string[:-1]
+            elif 'delete' in keys:
+                captured_string = captured_string[:-1]
+            elif 'return' in keys and (len(captured_string) < 2 or captured_string == '10'):
+                subject_response_finished = True
+            elif '0' in keys:
+                captured_string = captured_string+'0'
+            elif '1' in keys:
+                captured_string = captured_string+'1'
+            elif '2' in keys:
+                captured_string = captured_string+'2'
+            elif '3' in keys:
+                captured_string = captured_string+'3'
+            elif '4' in keys:
+                captured_string = captured_string+'4'
+            elif '5' in keys:
+                captured_string = captured_string+'5'
+            elif '6' in keys:
+                captured_string = captured_string+'6'
+            elif '7' in keys:
+                captured_string = captured_string+'7'
+            elif '8' in keys:
+                captured_string = captured_string+'8'
+            elif '9' in keys:
+                captured_string = captured_string+'9'
+            else:
+                pass
         
-        # if textbox is starting this frame...
-        if textbox.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
+        displayText = captured_string+cursorVariable
+        if displayText != oldDisplayText:
+            rate_text.setText(displayText)
+            oldDisplayText=displayText
+        
+        # *rate_text* updates
+        
+        # if rate_text is starting this frame...
+        if rate_text.status == NOT_STARTED and tThisFlip >= 0.5-frameTolerance:
             # keep track of start time/frame for later
-            textbox.frameNStart = frameN  # exact frame index
-            textbox.tStart = t  # local t and not account for scr refresh
-            textbox.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(textbox, 'tStartRefresh')  # time at next scr refresh
+            rate_text.frameNStart = frameN  # exact frame index
+            rate_text.tStart = t  # local t and not account for scr refresh
+            rate_text.tStartRefresh = tThisFlipGlobal  # on global time
+            win.timeOnFlip(rate_text, 'tStartRefresh')  # time at next scr refresh
             # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'textbox.started')
+            thisExp.timestampOnFlip(win, 'rate_text.started')
             # update status
-            textbox.status = STARTED
-            textbox.setAutoDraw(True)
+            rate_text.status = STARTED
+            rate_text.setAutoDraw(True)
         
-        # if textbox is active this frame...
-        if textbox.status == STARTED:
+        # if rate_text is active this frame...
+        if rate_text.status == STARTED:
             # update params
             pass
-        
-        # *key_resp_2* updates
-        waitOnFlip = False
-        
-        # if key_resp_2 is starting this frame...
-        if key_resp_2.status == NOT_STARTED and tThisFlip >= 0.0-frameTolerance:
-            # keep track of start time/frame for later
-            key_resp_2.frameNStart = frameN  # exact frame index
-            key_resp_2.tStart = t  # local t and not account for scr refresh
-            key_resp_2.tStartRefresh = tThisFlipGlobal  # on global time
-            win.timeOnFlip(key_resp_2, 'tStartRefresh')  # time at next scr refresh
-            # add timestamp to datafile
-            thisExp.timestampOnFlip(win, 'key_resp_2.started')
-            # update status
-            key_resp_2.status = STARTED
-            # keyboard checking is just starting
-            waitOnFlip = True
-            win.callOnFlip(key_resp_2.clock.reset)  # t=0 on next screen flip
-            win.callOnFlip(key_resp_2.clearEvents, eventType='keyboard')  # clear events on next screen flip
-        if key_resp_2.status == STARTED and not waitOnFlip:
-            theseKeys = key_resp_2.getKeys(keyList=['space'], ignoreKeys=["escape"], waitRelease=False)
-            _key_resp_2_allKeys.extend(theseKeys)
-            if len(_key_resp_2_allKeys):
-                key_resp_2.keys = _key_resp_2_allKeys[-1].name  # just the last key pressed
-                key_resp_2.rt = _key_resp_2_allKeys[-1].rt
-                key_resp_2.duration = _key_resp_2_allKeys[-1].duration
-                # a response ends the routine
-                continueRoutine = False
         
         # check for quit (typically the Esc key)
         if defaultKeyboard.getKeys(keyList=["escape"]):
@@ -1502,14 +1488,9 @@ def run(expInfo, thisExp, win, globalClock=None, thisSession=None):
     rate.tStop = globalClock.getTime(format='float')
     rate.tStopRefresh = tThisFlipGlobal
     thisExp.addData('rate.stopped', rate.tStop)
-    thisExp.addData('textbox.text',textbox.text)
-    # check responses
-    if key_resp_2.keys in ['', [], None]:  # No response was made
-        key_resp_2.keys = None
-    thisExp.addData('key_resp_2.keys',key_resp_2.keys)
-    if key_resp_2.keys != None:  # we had a response
-        thisExp.addData('key_resp_2.rt', key_resp_2.rt)
-        thisExp.addData('key_resp_2.duration', key_resp_2.duration)
+    # Run 'End Routine' code from rate_code
+    rate = final_response.replace("\n",",")
+    thisExp.addData('rate',rate)
     thisExp.nextEntry()
     # the Routine "rate" was not non-slip safe, so reset the non-slip timer
     routineTimer.reset()
